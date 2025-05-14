@@ -12,6 +12,8 @@ import time
 from crawler import process_single_url
 from groq import Groq
 from dotenv import load_dotenv
+os.system('playwright install')
+os.system('playwright install-deps')
 
 nest_asyncio.apply()
 
