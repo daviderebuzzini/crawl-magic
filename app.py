@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 nest_asyncio.apply()
 
-st.set_page_config(page_title="Pillar Magic Scraper", layout="centered")
+st.set_page_config(page_title="The Magic Scraper", layout="centered")
 st.title("🪄 Pillar Magic Scraper")
 st.markdown("""
 Upload a CSV file with a **'url'** column. The app will crawl each website, extract company info, and let you download the results. Progress, token usage, and model info are shown below.
