@@ -1,6 +1,7 @@
 streamlit
 pandas
 nest_asyncio
+python-dotenv
 groq
-dotenv
 crawl4ai
+playwright
