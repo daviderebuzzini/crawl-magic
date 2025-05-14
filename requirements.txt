@@ -1,0 +1,6 @@
+streamlit
+pandas
+nest_asyncio
+groq
+dotenv
+crawl4ai
