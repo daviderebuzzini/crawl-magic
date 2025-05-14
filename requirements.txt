@@ -5,3 +5,4 @@ python-dotenv
 groq
 crawl4ai
 playwright
+playwright install --with-deps
