@@ -117,6 +117,7 @@ async def process_single_url(start_url: str, client: Groq, return_tokens: bool =
     # Allow for forced crawler restart
     if restart_crawler:
         await asyncio.sleep(5)  # Give the event loop a break
+        print("Restarting crawler...")
 
     async with AsyncWebCrawler(max_depth=1,exclude_external_links=True,exclude_social_media_links=True) as crawler:
         result = await crawler.arun(url=start_url)
