@@ -106,13 +106,17 @@ def update_master_json(master_data: dict, new_data: dict, info_keys=None):
         elif key not in master_data: # Initialize if key is missing
             master_data[key] = "Not found"
 
-async def process_single_url(start_url: str, client: Groq, return_tokens: bool = False, model_name: str = "qwen-qwq-32b", info_keys=None) -> dict:
+async def process_single_url(start_url: str, client: Groq, return_tokens: bool = False, model_name: str = "qwen-qwq-32b", info_keys=None, restart_crawler=False) -> dict:
     if info_keys is None:
         info_keys = ALL_INFO_KEYS
     master_json_data = {key: "Not found" for key in info_keys}
     visited_urls = set()
     max_pages_to_crawl = 5 # Limit for inner pages
     total_tokens = 0
+
+    # Allow for forced crawler restart
+    if restart_crawler:
+        await asyncio.sleep(5)  # Give the event loop a break
 
     async with AsyncWebCrawler(max_depth=1,exclude_external_links=True,exclude_social_media_links=True) as crawler:
         result = await crawler.arun(url=start_url)
@@ -164,11 +168,13 @@ async def crawl_urls(urls: list[str]) -> pd.DataFrame:
         raise RuntimeError("GROQ_API_KEY not found in environment variables. Please set it in your .env file.")
     client = Groq(api_key=groq_api_key)
     results = []
-    for url in urls:
+    for i, url in enumerate(urls):
         # Ensure url has protocol
         if not url.startswith("http://") and not url.startswith("https://"):
             url = "https://" + url
-        info = await process_single_url(url, client)
+        # Restart crawler every 50 URLs
+        restart_crawler = (i % 50 == 0 and i != 0)
+        info = await process_single_url(url, client, restart_crawler=restart_crawler)
         row = {"original_url": url}
         row.update(info)
         results.append(row)
