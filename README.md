@@ -1,4 +1,4 @@
-# Pillar Magic Scraper
+# Magic Scraper
 
 A Streamlit web app to crawl company websites and extract structured information using Groq LLMs.
 
