@@ -10,7 +10,7 @@ import pandas as pd
 load_dotenv()
 
 # Define all the keys we want to populate in our JSON
-ALL_INFO_KEYS = ["phone_number", "email", "company_overview", "headquarters_location"]
+ALL_INFO_KEYS = ["phone_number", "email", "company_overview", "headquarters_location", "linkedin_url","instagram_url", "facebook_url"]
 
 async def extract_info_from_content(client: Groq, content: str, existing_data: dict = None, return_tokens: bool = False, model_name: str = "qwen-qwq-32b", info_keys=None) -> dict:
     """
