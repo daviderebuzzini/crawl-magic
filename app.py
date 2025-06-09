@@ -41,7 +41,10 @@ DEFAULT_INFO_KEYS = [
     "phone_number",
     "email",
     "company_overview",
-    "headquarters_location"
+    "headquarters_location",
+     "linkedin_url",
+     "instagram_url", 
+     "facebook_url"
 ]
 
 st.markdown("---")
